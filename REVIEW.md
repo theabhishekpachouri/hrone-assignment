@@ -4,7 +4,6 @@ List every defect you found in the starter `app/main.py` (helpers and endpoints)
 
 | # | Where (function / line) | What is wrong | How you'd notice it (test, input, or symptom) | How you fixed it |
 |---|---|---|---|---|
-
 | 1 | Global setup (`MongoClient`) | Using sync PyMongo inside FastAPI | Server will block or lag under heavy multi-user requests | Switched to Motor (`AsyncIOMotorClient`) for async support |
 | 2 | `list_employees` | Wrong skip formula (`page * page_size`) | Page 1 skips the first 20 records (`skip=20` instead of `0`) | Fixed formula to `(page - 1) * page_size` |
 | 3 | `list_employees` | Total count ignores department filter | Total count shows all employees even when I filter by department | Passed query filter into count: `db.employees.count_documents(q)` |
